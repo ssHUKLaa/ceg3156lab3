@@ -4,6 +4,7 @@ use ieee.std_logic_1164.all;
 entity control_unit is
 	port(
 		opcode		: in std_logic_vector(5 downto 0);
+		Zero : in std_logic;
 		RegDst		: out std_logic;
 		ALUSrc		: out std_logic;
 		MemtoReg		: out std_logic;
@@ -13,6 +14,7 @@ entity control_unit is
 		Branch		: out std_logic;
 		BNE : out std_logic;
 		Jump : out std_logic;
+		Flush : Out std_logic;
 		ALUOp			: out std_logic_vector(1 downto 0)
 	);
 end control_unit;
@@ -38,6 +40,7 @@ begin
 	MemWrite <= sw;
 	Branch 	<= beq;
 	BNE <= bnetemp;
+	Flush <= (Branch AND Zero) OR (BNE AND NOT Zero);
 	
 	-- ALUOp signal generation
 	ALUOp(1) <= rType;
