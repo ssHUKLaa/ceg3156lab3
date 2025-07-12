@@ -121,14 +121,51 @@ architecture basic of pipelinedproc is
         );
     end component;
 
+    component mux_4to1_32bit IS
+        PORT (
+            sel     : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);               -- 2-bit select signal
+            d_in0   : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);              -- 32-bit input 0
+            d_in1   : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);              -- 32-bit input 1
+            d_in2   : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);              -- 32-bit input 2
+            d_in3   : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);              -- 32-bit input 3
+            d_out   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)               -- 32-bit output
+        );
+    END component;
+
+    component mux_2to1_5bit IS
+        PORT(
+            sel     : IN  STD_LOGIC;                           -- Select input
+            d_in1   : IN  STD_LOGIC_VECTOR(4 DOWNTO 0);        -- 5-bit Data input 1
+            d_in2   : IN  STD_LOGIC_VECTOR(4 DOWNTO 0);        -- 5-bit Data input 2
+            d_out   : OUT STD_LOGIC_VECTOR(4 DOWNTO 0)         -- 5-bit Data output
+        );
+    END component;
+
+    component Forwarding_unit is
+        port (
+            ID_EX_rs        : in std_logic_vector(4 downto 0);
+            ID_EX_rt        : in std_logic_vector(4 downto 0);
+            EX_MEM_RegWrite : in std_logic;
+            EX_MEM_rd       : in std_logic_vector(4 downto 0);
+            MEM_WB_RegWrite : in std_logic;
+            MEM_WB_rd       : in std_logic_vector(4 downto 0);
+            ForwardA        : out std_logic_vector(1 downto 0);
+            ForwardB        : out std_logic_vector(1 downto 0)
+        );
+    end component;
+
     SIGNAL newPCval, PC_SIG, instrOut, incPC, incPCGated, sgnextinstr, shlsgnextinstr, readReg1, readReg2, branchaddr : std_logic_vector(31 downto 0);
     SIGNAL FlushedOpcode : std_logic_vector(5 downto 0);
-    SIGNAL hduStall, hduGatedRegDst, hduGatedALUSrc, hduGatedMemtoReg, hduGatedRegWrite, hduGatedMemRead, hduGatedMemWrite, hduGatedBranch, hduGatedJmp : std_logic;
+    SIGNAL hduStall, hduGatedRegDst, hduGatedALUSrc, hduGatedMemtoReg, hduGatedRegWrite, hduGatedMemRead, hduGatedMemWrite : std_logic;
     SIGNAL Flush, gatedFlush, readregseq, PCSrc : std_logic;
     SIGNAL RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, Jump : std_logic;
-    SIGNAL hduGatedALUOp, ALUOp : std_logic_vector(1 downto 0);
-    SIGNAL EXreadReg1, EXreadReg2, EXsgnextinstr : std_logic_vector(31 downto 0);
+    SIGNAL hduGatedALUOp, ALUOp, EXALUOP, fwdA, fwdB : std_logic_vector(1 downto 0);
+    SIGNAL EXreadReg1, EXreadReg2, EXsgnextinstr, EXALUAIn, EXALUBIn, EXALUMUXB_One, EXALU_res, MEM_ALURes, MEM_WriteDataIn, WBReadData, WB_ALURes, WBMemRegData : std_logic_vector(31 downto 0);
     SIGNAL EXinstruction : std_logic_vector(25 downto 11);
+    SIGNAL EXRegDst, EXALUSrc, EXMemtoReg, EXMemRead, EXRegWrite, EXMemWrite : std_logic;
+    SIGNAL EX_ALUOpr : std_logic_vector(2 downto 0);
+    SIGNAL RegDstEX, RegDstMEM, RegDstWB : std_logic_vector(4 downto 0);
+    SIGNAL FlushGatedEXMemtoReg, FlushGatedEXMemRead, FlushGatedEXRegWrite, FlushGatedEXMemWrite, MEMMemtoReg, MEMMemRead, MEMMemWrite, MEMRegWrite, WBRegWrite, WBMemtoReg : std_logic;
 
 begin
 
@@ -199,7 +236,7 @@ begin
     hazardunit_inst: entity work.hazardunit
     port map (
       MemRead => MemRead,
-      RtID    => RtID,
+      RtID    => EXinstruction(20 downto 16),
       RtIF    => InstructionOut(20 downto 16),
       RsIF    => InstructionOut(25 downto 21),
       stall   => hduStall
@@ -208,7 +245,7 @@ begin
     control_unit_inst: entity work.control_unit
     port map (
       opcode   => FlushedOpcode,
-      Zero     => test,
+      Zero     => readregseq,
       RegDst   => RegDst,
       ALUSrc   => ALUSrc,
       MemtoReg => MemtoReg,
@@ -221,6 +258,7 @@ begin
       Flush => Flush,
       ALUOp    => ALUOp
     );
+    
 
     hduGatedRegDst <= RegDst AND NOT (hduStall or Flush);
     hduGatedALUSrc <= ALUSrc AND NOT (hduStall or Flush);
@@ -228,7 +266,6 @@ begin
     hduGatedRegWrite <= RegWrite AND NOT (hduStall or Flush);
     hduGatedMemRead <= MemRead AND NOT (hduStall or Flush);
     hduGatedMemWrite <= MemWrite AND NOT (hduStall or Flush);
-    hduGatedBranch <= Branch AND NOT (hduStall or Flush);
     hduGatedALUOp(1) <= ALUOP(1) AND NOT (hduStall or Flush);
     hduGatedALUOp(0) <= ALUOP(0) AND NOT (hduStall or Flush);
 
@@ -282,6 +319,28 @@ begin
 		  o_qBar     => open
 		);
 
+    EX_MemWrite_DFF: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => hduGatedMemWrite,
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => EXMemWrite,
+		  o_qBar     => open
+		);
+
+    ID_EX_ALUOP: FOR i in 0 to 1 generate
+      enardff_2_inst: entity work.enARdFF_2
+      port map (
+        i_resetBar => GReset,
+        i_d        => hduGatedALUOp(i),
+        i_enable   => '1',
+        i_clock    => GClock,
+        o_q        => EXALUOP(i),
+        o_qBar     => open
+      );
+    end generate;
+
     reg_file_inst: entity work.reg_file
     port map (
       clk        => GClock,
@@ -289,8 +348,8 @@ begin
       reg_write  => RegWrite,
       read_reg1  => InstructionOut(25 downto 21),
       read_reg2  => InstructionOut(20 downto 16),
-      write_reg  => test,
-      write_data => test,
+      write_reg  => RegDstWB,
+      write_data => WBMemRegData,
       read_data1 => readReg1,
       read_data2 => readReg2
     );
@@ -392,8 +451,220 @@ begin
 		);
 	end generate;
 
+  #EX
+
+  FlushGatedEXMemtoReg <= EXMemtoReg and Flush;
+  FlushGatedEXMemRead <= EXMemRead and Flush;
+  FlushGatedEXRegWrite <= EXRegWrite and Flush;
+  FlushGatedEXMemWrite <= EXMemWrite and Flush;
+
+  mux_4to1_32bit_inst_EX_A: entity work.mux_4to1_32bit
+  port map (
+    sel   => fwdA,
+    d_in0 => EXreadReg1,
+    d_in1 => WBMemRegData,
+    d_in2 => MEM_ALURes,
+    d_in3 => MEM_ALURes,
+    d_out => EXALUAIn
+  );
+
+  mux_4to1_32bit_inst_EX_B_1: entity work.mux_4to1_32bit
+  port map (
+    sel   => fwdB,
+    d_in0 => EXreadReg2,
+    d_in1 => WBMemRegData,
+    d_in2 => MEM_ALURes,
+    d_in3 => MEM_ALURes,
+    d_out => EXALUMUXB_One
+  );
+
+  forwarding_unit_inst: Forwarding_unit
+  port map (
+    ID_EX_rs        => EXinstruction(25 downto 21),
+    ID_EX_rt        => EXinstruction(20 downto 16),
+    EX_MEM_RegWrite => MEMRegWrite,
+    EX_MEM_rd       => RegDstMEM,
+    MEM_WB_RegWrite => WBRegWrite,
+    MEM_WB_rd       => RegDstWB,
+    ForwardA        => fwdA,
+    ForwardB        => fwdB
+  );
+
+
+
+  mux_2to1_32bit_inst_EX_B_2: mux_2to1_32bit
+  port map (
+    sel   => EXALUSrc,
+    d_in1 => EXALUMUXB_One,
+    d_in2 => EXsgnextinstr,
+    d_out => EXALUBIn
+  );
+
+  alu_control_inst: entity work.ALU_Control
+  port map (
+    ALUOP => EXALUOP,
+    funct => EXsgnextinstr(5 downto 0),
+    Opr   => EX_ALUOpr
+  );
+
+  alu_32bit_inst: entity work.ALU_32bit
+  port map (
+    A       => EXALUAIn,
+    B       => EXALUBIn,
+    sel     => EX_ALUOpr,
+    ALU_res => EXALU_res,
+    Zero    => open
+  );
+
+  mux_2to1_5bit_inst: mux_2to1_5bit
+  port map (
+    sel   => EXRegDst,
+    d_in1 => EXinstruction(20 downto 16),
+    d_in2 => EXinstruction(15 downto 11),
+    d_out => RegDstEX
+  );
+
+  enardff_2_inst_EXMtR: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => FlushGatedEXMemtoReg,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => MEMMemtoReg,
+    o_qBar     => open
+  );
+
+  enardff_2_inst_EXMR: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => FlushGatedEXMemRead,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => MEMMemRead,
+    o_qBar     => open
+  );
+
+  enardff_2_inst_RW: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => FlushGatedEXRegWrite,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => MEMRegWrite,
+    o_qBar     => open
+  );
+
+  enardff_2_inst: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => FlushGatedEXMemWrite,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => MEMMemWrite,
+    o_qBar     => open
+  );
+
+  EX_MEM_ALURes: FOR i in 0 to 31 GENERATE 
+        enardff_2_inst: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => EXALU_res(i),
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => MEM_ALURes(i),
+		  o_qBar     => open
+		);
+	end generate;
+  
+  EX_MEM_WriteData: FOR i in 0 to 31 GENERATE 
+        enardff_2_inst: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => EXALUMUXB_One(i),
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => MEM_WriteDataIn(i),
+		  o_qBar     => open
+		);
+	end generate;
+
+  EX_MEM_RegDst: FOR i in 0 to 4 GENERATE
+      enardff_2_inst: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => RegDstEX(i),
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => RegDstMEM(i),
+		  o_qBar     => open
+		);
+	end generate;
+
+  #MEM
+
+  data_ram_inst: data_ram
+  port map (
+    aclr    => GReset,
+    address => MEM_ALURes,
+    clock   => GClock,
+    data    => MEM_WriteDataIn,
+    rden    => MEMMemRead,
+    wren    => MEMMemWrite,
+    q       => WBReadData
+  );
     
-    
+  enardff_2_inst_wbrw: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => MEMRegWrite,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => WBRegWrite,
+    o_qBar     => open
+  );
+
+  enardff_2_inst_wbmtr: entity work.enARdFF_2
+  port map (
+    i_resetBar => GReset,
+    i_d        => MEMMemtoReg,
+    i_enable   => '1',
+    i_clock    => GClock,
+    o_q        => WBMemtoReg,
+    o_qBar     => open
+  );
+
+  MEM_WB_ALURes: FOR i in 0 to 31 GENERATE 
+        enardff_2_inst: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => MEM_ALURes(i),
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => WB_ALURes(i),
+		  o_qBar     => open
+		);
+	end generate;
+
+  MEM_WB_RegDst: FOR i in 0 to 4 GENERATE
+      enardff_2_inst: entity work.enARdFF_2
+		port map (
+		  i_resetBar => GReset,
+		  i_d        => RegDstMEM(i),
+		  i_enable   => '1',
+		  i_clock    => GClock,
+		  o_q        => RegDstWB(i),
+		  o_qBar     => open
+		);
+	end generate;
+
+  mux_2to1_32bit_inst_MRDst: entity work.mux_2to1_32bit
+  port map (
+    sel   => WBMemtoReg,
+    d_in1 => WBReadData,
+    d_in2 => WB_ALURes,
+    d_out => WBMemRegData
+  );
+
 
 
 end basic;
