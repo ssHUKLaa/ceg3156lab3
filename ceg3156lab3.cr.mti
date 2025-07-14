@@ -1,0 +1,149 @@
+C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_8to1_8bit
+-- Compiling architecture structural of mux_8to1_8bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_4to1_32bit
+-- Compiling architecture structural of mux_4to1_32bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_32to1_32bit
+-- Compiling architecture structural of mux_32to1_32bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity reg_file
+-- Compiling architecture basic of reg_file
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity enARdFF_2
+-- Compiling architecture rtl of enARdFF_2
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package altera_mf_components
+-- Compiling entity instruction_rom
+-- Compiling architecture SYN of instruction_rom
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_8to1_32bit
+-- Compiling architecture structural of mux_8to1_32bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity control_unit
+-- Compiling architecture structural of control_unit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity equality_Comparator_5bit
+-- Compiling architecture basic of equality_Comparator_5bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package altera_mf_components
+-- Compiling entity data_ram
+-- Compiling architecture SYN of data_ram
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity hazardunit
+-- Compiling architecture basic of hazardunit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Forwarding_unit
+-- Compiling architecture basic of Forwarding_unit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity CLA_32bit
+-- Compiling architecture basic of CLA_32bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity ALU_32bit
+-- Compiling architecture basic of ALU_32bit
+-- Loading entity CLA_32bit
+-- Loading entity mux_8to1_32bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity CLA_8bit
+-- Compiling architecture basic of CLA_8bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity ALU_Control
+-- Compiling architecture struct of ALU_Control
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_2to1_5bit
+-- Compiling architecture structural of mux_2to1_5bit
+
+} {} {}} C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd {1 {vcom -work work -2002 -explicit C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_2to1_32bit
+-- Compiling architecture structural of mux_2to1_32bit
+
+} {} {}}

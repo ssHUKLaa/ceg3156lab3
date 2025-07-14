@@ -40,7 +40,7 @@ begin
 	MemWrite <= sw;
 	Branch 	<= beq;
 	BNE <= bnetemp;
-	Flush <= (Branch AND Zero) OR (BNE AND NOT Zero);
+	Flush <= (beq AND Zero) OR (bnetemp AND NOT Zero);
 	
 	-- ALUOp signal generation
 	ALUOp(1) <= rType;

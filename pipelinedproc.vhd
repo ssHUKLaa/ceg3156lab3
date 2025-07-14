@@ -4,8 +4,9 @@ use ieee.std_logic_1164.all;
 entity pipelinedproc is
     port(
         GClock, GReset : IN std_logic;
-        ValueSelect, InstrSelect : IN std_logic_vector(1 downto 0);
-        MuxOut : OUT std_logic_vector(7 downto 0);
+        ValueSelect : IN std_logic_vector(2 downto 0);
+        InstrSelect : IN std_logic_vector(1 downto 0);
+        MuxOut : OUT std_logic_vector(31 downto 0);
         InstructionOut : OUT std_logic_vector(31 downto 0);
         BranchOut, ZeroOut, MemWriteOut, RegWriteOut : OUT std_logic
     );
@@ -154,13 +155,43 @@ architecture basic of pipelinedproc is
         );
     end component;
 
+    component mux_8to1_8bit IS
+        PORT(
+            sel   : IN  STD_LOGIC_VECTOR(2 DOWNTO 0); -- 3-bit selector
+            d_in0 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in1 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in2 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in3 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in4 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in5 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in6 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_in7 : IN  STD_LOGIC_VECTOR(7 DOWNTO 0);
+            d_out : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+        );
+    END component;
+
+    component mux_8to1_32bit IS
+        PORT(
+            sel   : IN  STD_LOGIC_VECTOR(2 DOWNTO 0); -- 3-bit selector
+            d_in0 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in1 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in2 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in3 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in4 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in5 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in6 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_in7 : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+            d_out : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        );
+    END component;
+
     SIGNAL newPCval, PC_SIG, instrOut, incPC, incPCGated, sgnextinstr, shlsgnextinstr, readReg1, readReg2, branchaddr : std_logic_vector(31 downto 0);
     SIGNAL FlushedOpcode : std_logic_vector(5 downto 0);
     SIGNAL hduStall, hduGatedRegDst, hduGatedALUSrc, hduGatedMemtoReg, hduGatedRegWrite, hduGatedMemRead, hduGatedMemWrite : std_logic;
     SIGNAL Flush, gatedFlush, readregseq, PCSrc : std_logic;
-    SIGNAL RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, Jump : std_logic;
+    SIGNAL RegDst, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, Jump, enStall : std_logic;
     SIGNAL hduGatedALUOp, ALUOp, EXALUOP, fwdA, fwdB : std_logic_vector(1 downto 0);
-    SIGNAL EXreadReg1, EXreadReg2, EXsgnextinstr, EXALUAIn, EXALUBIn, EXALUMUXB_One, EXALU_res, MEM_ALURes, MEM_WriteDataIn, WBReadData, WB_ALURes, WBMemRegData : std_logic_vector(31 downto 0);
+    SIGNAL EXreadReg1, EXreadReg2, EXsgnextinstr, EXALUAIn, EXALUBIn, EXALUMUXB_One, EXALU_res, MEM_ALURes, MEM_WriteDataIn, WBReadData, WB_ALURes, WBMemRegData, outDataMisc : std_logic_vector(31 downto 0);
     SIGNAL EXinstruction : std_logic_vector(25 downto 11);
     SIGNAL EXRegDst, EXALUSrc, EXMemtoReg, EXMemRead, EXRegWrite, EXMemWrite : std_logic;
     SIGNAL EX_ALUOpr : std_logic_vector(2 downto 0);
@@ -169,12 +200,14 @@ architecture basic of pipelinedproc is
 
 begin
 
+  enStall <= NOT hduStall;
+
     GEN_PC: FOR i IN 0 TO 31 GENERATE
 		enardff_2_inst: entity work.enARdFF_2
 		port map (
 		  i_resetBar => GReset,
 		  i_d        => newPCval(i),
-		  i_enable   => '1',
+		  i_enable   => enStall,
 		  i_clock    => GClock,
 		  o_q        => PC_SIG(i),
 		  o_qBar     => open
@@ -207,7 +240,7 @@ begin
 		port map (
 		  i_resetBar => GReset,
 		  i_d        => incPC(i),
-		  i_enable   => '1',
+		  i_enable   => enStall,
 		  i_clock    => GClock,
 		  o_q        => incPCGated(i),
 		  o_qBar     => open
@@ -237,8 +270,8 @@ begin
     port map (
       MemRead => MemRead,
       RtID    => EXinstruction(20 downto 16),
-      RtIF    => InstructionOut(20 downto 16),
-      RsIF    => InstructionOut(25 downto 21),
+      RtIF    => instrOut(20 downto 16),
+      RsIF    => instrOut(25 downto 21),
       stall   => hduStall
     );
 
@@ -345,16 +378,16 @@ begin
     port map (
       clk        => GClock,
       resetBar   => GReset,
-      reg_write  => RegWrite,
-      read_reg1  => InstructionOut(25 downto 21),
-      read_reg2  => InstructionOut(20 downto 16),
+      reg_write  => WBRegWrite,
+      read_reg1  => instrOut(25 downto 21),
+      read_reg2  => instrOut(20 downto 16),
       write_reg  => RegDstWB,
       write_data => WBMemRegData,
       read_data1 => readReg1,
       read_data2 => readReg2
     );
 
-    sgnextinstr <= (others => InstructionOut(15)) & instrOut(15 downto 0);
+    sgnextinstr <= (31 downto 16 => instrOut(15)) & instrOut(15 downto 0);
     
     shlsgnextinstr <= sgnextinstr(29 downto 0) & "00";
 
@@ -443,7 +476,7 @@ begin
         enardff_2_inst: entity work.enARdFF_2
 		port map (
 		  i_resetBar => GReset,
-		  i_d        => InstructionOut(i),
+		  i_d        => instrOut(i),
 		  i_enable   => '1',
 		  i_clock    => GClock,
 		  o_q        => EXinstruction(i),
@@ -451,12 +484,11 @@ begin
 		);
 	end generate;
 
-  #EX
 
-  FlushGatedEXMemtoReg <= EXMemtoReg and Flush;
-  FlushGatedEXMemRead <= EXMemRead and Flush;
-  FlushGatedEXRegWrite <= EXRegWrite and Flush;
-  FlushGatedEXMemWrite <= EXMemWrite and Flush;
+  FlushGatedEXMemtoReg <= EXMemtoReg;
+  FlushGatedEXMemRead <= EXMemRead;
+  FlushGatedEXRegWrite <= EXRegWrite;
+  FlushGatedEXMemWrite <= EXMemWrite;
 
   mux_4to1_32bit_inst_EX_A: entity work.mux_4to1_32bit
   port map (
@@ -600,12 +632,11 @@ begin
 		);
 	end generate;
 
-  #MEM
 
   data_ram_inst: data_ram
   port map (
-    aclr    => GReset,
-    address => MEM_ALURes,
+    aclr    => '0',
+    address => MEM_ALURes(9 downto 2),
     clock   => GClock,
     data    => MEM_WriteDataIn,
     rden    => MEMMemRead,
@@ -660,12 +691,42 @@ begin
   mux_2to1_32bit_inst_MRDst: entity work.mux_2to1_32bit
   port map (
     sel   => WBMemtoReg,
-    d_in1 => WBReadData,
-    d_in2 => WB_ALURes,
+    d_in1 => WB_ALURes,
+    d_in2 => WBReadData,
     d_out => WBMemRegData
   );
 
 
+  mux_4to1_32bit_inst: entity work.mux_4to1_32bit
+  port map (
+    sel   => InstrSelect,
+    d_in0 => instrOut,
+    d_in1 => instrOut,
+    d_in2 => instrOut,
+    d_in3 => instrOut,
+    d_out => InstructionOut
+  );
+
+  outDataMisc <= "0000000000000000000000000" & RegDst & Jump & MemRead & MemtoReg & ALUOp & ALUSrc;
+
+  mux_8to1_8bit_inst: mux_8to1_32bit
+  port map (
+    sel   => ValueSelect,
+    d_in0 => PC_SIG,
+    d_in1 => EXALU_res,
+    d_in2 => readReg1,
+    d_in3 => readReg2,
+    d_in4 => MEM_WriteDataIn,
+    d_in5 => outDataMisc,
+    d_in6 => outDataMisc,
+    d_in7 => outDataMisc,
+    d_out => MuxOut
+  );
+
+  BranchOut <= Branch;
+  ZeroOut <= readregseq;
+  MemWriteOut <= MemWrite;
+  RegWriteOut <= RegWrite;
 
 end basic;
 

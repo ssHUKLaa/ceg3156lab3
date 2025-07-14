@@ -1,0 +1,687 @@
+m255
+K3
+13
+cModel Technology
+dC:\Users\sahil\Documents\repos\ceg3156lab2
+Ealu_32bit
+Z0 w1752114181
+Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z3 dC:\Users\sahil\Documents\repos\ceg3156lab3
+Z4 8C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd
+Z5 FC:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd
+l0
+L4
+V4Cg6?3AJRnIQWGI@[6D^m0
+Z6 OV;C;10.1d;51
+32
+Z7 !s108 1752449384.647000
+Z8 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd|
+Z9 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_32bit.vhd|
+Z10 o-work work -2002 -explicit -O0
+Z11 tExplicit 1
+!s100 LzJn>KFzEKZg[:TJeRmO]0
+!i10b 1
+Abasic
+Z12 DEx4 work 14 mux_8to1_32bit 0 22 Sd;lz6R1T4M6WheJHYldU1
+Z13 DEx4 work 9 cla_32bit 0 22 JS0<cmeTF@4X3>3IT3o`j1
+R1
+R2
+Z14 DEx4 work 9 alu_32bit 0 22 4Cg6?3AJRnIQWGI@[6D^m0
+l43
+L13
+Vn3o;<QZ2HNCnoXK2ZU5g_1
+R6
+32
+R7
+R8
+R9
+R10
+R11
+!s100 IW[ZEkeMZSPNZ;7BU9;5e1
+!i10b 1
+Ealu_control
+Z15 w1750621901
+R1
+R2
+R3
+Z16 8C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd
+Z17 FC:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd
+l0
+L4
+Vm1PS@G8^FJQ]EoR5mDC=31
+R6
+32
+Z18 !s108 1752449384.733000
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd|
+Z20 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/ALU_Control.vhd|
+R10
+R11
+!s100 0T3f6i[h[Kzn682A3`]:72
+!i10b 1
+Astruct
+R1
+R2
+Z21 DEx4 work 11 alu_control 0 22 m1PS@G8^FJQ]EoR5mDC=31
+l14
+L12
+VVYhk]:42[844zgHXS]=Hc1
+R6
+32
+R18
+R19
+R20
+R10
+R11
+!s100 Tm^I:L^ClcDKfN1WP^;2l2
+!i10b 1
+Ecla_32bit
+Z22 w1749156769
+R1
+R2
+R3
+Z23 8C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd
+Z24 FC:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd
+l0
+L4
+VJS0<cmeTF@4X3>3IT3o`j1
+R6
+32
+Z25 !s108 1752449384.824000
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd|
+Z27 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_32bit.vhd|
+R10
+R11
+!s100 ]K`dYPXAIEC@;FR4d1o>;3
+!i10b 1
+Abasic
+R1
+R2
+R13
+l32
+L15
+V<jK<RZ^@J^NSHDQm_S11z0
+R6
+32
+R25
+R26
+R27
+R10
+R11
+!s100 9_:d6:zEUF:RfMzhV6H_I3
+!i10b 1
+Ecla_8bit
+Z28 w1746679613
+R1
+R2
+R3
+Z29 8C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd
+Z30 FC:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd
+l0
+L4
+V7<Jogf`F0h<___k7YAkAo2
+R6
+32
+Z31 !s108 1752449386.259000
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd|
+Z33 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/CLA_8bit.vhd|
+R10
+R11
+!s100 >K_Hn;F[Jh2>EVX653Pj?0
+!i10b 1
+Abasic
+R1
+R2
+DEx4 work 8 cla_8bit 0 22 7<Jogf`F0h<___k7YAkAo2
+l22
+L13
+VWBak?<Kc]9;aEE`E?iUa[0
+R6
+32
+R31
+R32
+R33
+R10
+R11
+!s100 f^@RAPWfiN00mjbE]Cb[o1
+!i10b 1
+Econtrol_unit
+Z34 w1752440920
+R1
+R2
+R3
+Z35 8C:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd
+Z36 FC:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd
+l0
+L4
+V:GRLJEn758SRdG8e]G^9P2
+R6
+32
+Z37 !s108 1752449384.912000
+Z38 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd|
+Z39 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/control_unit.vhd|
+R10
+R11
+!s100 1>GgXEa^HWlXR;ifb[zX41
+!i10b 1
+Astructural
+R1
+R2
+Z40 DEx4 work 12 control_unit 0 22 :GRLJEn758SRdG8e]G^9P2
+l25
+L22
+VQA?FC]f;6Y0B_U>zgHVoC0
+R6
+32
+R37
+R38
+R39
+R10
+R11
+!s100 UfZ^97ab>eJ4bQ4Md>9KW3
+!i10b 1
+Edata_ram
+Z41 w1751847052
+Z42 DPx9 altera_mf 20 altera_mf_components 0 22 zh;bE09gCIPDVLK?MN49L3
+R1
+R2
+R3
+Z43 8C:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd
+Z44 FC:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd
+l0
+L43
+Vk2IIl<474a^HSOiHW4^da0
+R6
+32
+Z45 !s108 1752449385.003000
+Z46 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd|
+Z47 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/data_ram.vhd|
+R10
+R11
+!s100 LhaC@Jm3GS>U@TRhRmA:U0
+!i10b 1
+Asyn
+R42
+R1
+R2
+DEx4 work 8 data_ram 0 22 k2IIl<474a^HSOiHW4^da0
+l61
+L57
+V`]z8:<^aPlPWXVEUedVZ91
+R6
+32
+R45
+R46
+R47
+R10
+R11
+!s100 Jd]f:^Z1OR2dj]_U>l;<F0
+!i10b 1
+Eenardff_2
+Z48 w1746568293
+R1
+R2
+R3
+Z49 8C:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd
+Z50 FC:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd
+l0
+L31
+VW45mLHZkgINE^UQaXmP5[3
+R6
+32
+Z51 !s108 1752449385.099000
+Z52 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd|
+Z53 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/enardFF_2.vhd|
+R10
+R11
+!s100 LM:aJ[Ade62O^TDCQB2jH0
+!i10b 1
+Artl
+R1
+R2
+Z54 DEx4 work 9 enardff_2 0 22 W45mLHZkgINE^UQaXmP5[3
+l43
+L40
+V3clzVS[W5TXh[=;E;]4B51
+R6
+32
+R51
+R52
+R53
+R10
+R11
+!s100 n`NKG5gX7V@?eV@4dAU663
+!i10b 1
+Eequality_comparator_5bit
+Z55 w1752358224
+R1
+R2
+R3
+Z56 8C:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd
+Z57 FC:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd
+l0
+L4
+VQ08D[12]6GWPI>7V7S31[3
+R6
+32
+Z58 !s108 1752449385.193000
+Z59 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd|
+Z60 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/equality_Comparator_5bit.vhd|
+R10
+R11
+!s100 QTHndo67za>mI>3dIl4nY0
+!i10b 1
+Abasic
+R1
+R2
+DEx4 work 24 equality_comparator_5bit 0 22 Q08D[12]6GWPI>7V7S31[3
+l13
+L11
+Vi5LFNHSn`GmQ_DRBf?kLo2
+R6
+32
+R58
+R59
+R60
+R10
+R11
+!s100 Qm;nf0TDoR`NaFNDnZM^00
+!i10b 1
+Eforwarding_unit
+Z61 w1752358307
+R1
+R2
+R3
+Z62 8C:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd
+Z63 FC:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd
+l0
+L5
+V<nP9hUGAEPHV<VMY5DEE72
+R6
+32
+Z64 !s108 1752449385.287000
+Z65 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd|
+Z66 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/Forwarding_unit.vhd|
+R10
+R11
+!s100 6SC][h5iG8=JzPR9YNgUM1
+!i10b 1
+Abasic
+R1
+R2
+DEx4 work 15 forwarding_unit 0 22 <nP9hUGAEPHV<VMY5DEE72
+l27
+L18
+Vil7^@o^_BY:mH2UX=e5[o0
+R6
+32
+R64
+R65
+R66
+R10
+R11
+!s100 S4XV^Z@PBCT^774T9MbS:1
+!i10b 1
+Ehazardunit
+Z67 w1752448739
+R1
+R2
+R3
+Z68 8C:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd
+Z69 FC:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd
+l0
+L4
+VKZ=kO[GRz?EcVJPmVca`10
+R6
+32
+Z70 !s108 1752449385.381000
+Z71 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd|
+Z72 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/hazardunit.vhd|
+R10
+R11
+!s100 P@nbE2HRJgD7IeOb_iKU82
+!i10b 1
+Abasic
+R1
+R2
+Z73 DEx4 work 10 hazardunit 0 22 KZ=kO[GRz?EcVJPmVca`10
+l15
+L12
+V5FM1AOcdMYKLVhMWi961B1
+R6
+32
+R70
+R71
+R72
+R10
+R11
+!s100 @d`8PR@Q2objWo_=2dK7h1
+!i10b 1
+Einstruction_rom
+Z74 w1751846780
+R42
+R1
+R2
+R3
+Z75 8C:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd
+Z76 FC:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd
+l0
+L43
+V96;lMi2LC4SfgoPeQB@3]3
+R6
+32
+Z77 !s108 1752449385.477000
+Z78 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd|
+Z79 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/instruction_rom.vhd|
+R10
+R11
+!s100 TRYLZ5Sz6zb09MQ<Yak^82
+!i10b 1
+Asyn
+R42
+R1
+R2
+Z80 DEx4 work 15 instruction_rom 0 22 96;lMi2LC4SfgoPeQB@3]3
+l57
+L53
+VVAg;cYUcJV6_1F::Db>m>2
+R6
+32
+R77
+R78
+R79
+R10
+R11
+!s100 0URCK7`gFQACMQHOh<gmP3
+!i10b 1
+Emux_2to1_32bit
+Z81 w1749157401
+R1
+R2
+R3
+Z82 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd
+Z83 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd
+l0
+L4
+VzKT_z3DbdbVR67C9WKi812
+R6
+32
+Z84 !s108 1752449385.675000
+Z85 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd|
+Z86 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_32bit.vhd|
+R10
+R11
+!s100 JFS1DdI3O;nCM^o?0>5EY2
+!i10b 1
+Astructural
+R1
+R2
+Z87 DEx4 work 14 mux_2to1_32bit 0 22 zKT_z3DbdbVR67C9WKi812
+l20
+L13
+VFG?YPz;jjD2d5HiYOMY^:2
+R6
+32
+R84
+R85
+R86
+R10
+R11
+!s100 k8j?JGb9gC=i8jo]IQ:O>1
+!i10b 1
+Emux_2to1_5bit
+Z88 w1752354699
+R1
+R2
+R3
+Z89 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd
+Z90 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd
+l0
+L4
+Vz4zh0M4:F[Y_iOPmI]<Ld0
+R6
+32
+Z91 !s108 1752449385.574000
+Z92 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd|
+Z93 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_2to1_5bit.vhd|
+R10
+R11
+!s100 ZmnRKjiVWZ<fFPli7RXZY1
+!i10b 1
+Astructural
+R1
+R2
+DEx4 work 13 mux_2to1_5bit 0 22 z4zh0M4:F[Y_iOPmI]<Ld0
+l20
+L13
+VP[ARH27U]BIoaG;cVGCh<1
+R6
+32
+R91
+R92
+R93
+R10
+R11
+!s100 ^zR8dU`;^=X;X4W^QbKno2
+!i10b 1
+Emux_32to1_32bit
+Z94 w1749154879
+R1
+R2
+R3
+Z95 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd
+Z96 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd
+l0
+L4
+V<1M8fj1]gon]G`lYi>h>W0
+R6
+32
+Z97 !s108 1752449386.354000
+Z98 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd|
+Z99 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_32to1_32bit.vhd|
+R10
+R11
+!s100 jlEZKzlkk721Jhd^YV`a23
+!i10b 1
+Astructural
+R1
+R2
+DEx4 work 15 mux_32to1_32bit 0 22 <1M8fj1]gon]G`lYi>h>W0
+l21
+L12
+V4:moVDBO42NU>iTOFdUHa2
+R6
+32
+R97
+R98
+R99
+R10
+R11
+!s100 RnAmOcMmAe6NLiQVD29V_0
+!i10b 1
+Emux_4to1_32bit
+Z100 w1752353586
+R1
+R2
+R3
+Z101 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd
+Z102 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd
+l0
+L4
+VVfH0AoEMIO8l@9>_NA0]@1
+R6
+32
+Z103 !s108 1752449385.773000
+Z104 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd|
+Z105 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_4to1_32bit.vhd|
+R10
+R11
+!s100 N8aneW[@X^TnX<Nn<z3:Z2
+!i10b 1
+Astructural
+R1
+R2
+Z106 DEx4 work 14 mux_4to1_32bit 0 22 VfH0AoEMIO8l@9>_NA0]@1
+l28
+L15
+Vlc_n1jh:o9C44ACjHGJBX0
+R6
+32
+R103
+R104
+R105
+R10
+R11
+!s100 eJE`CC`Tl=f58kAE6c4KU2
+!i10b 1
+Emux_8to1_32bit
+Z107 w1749156359
+R1
+R2
+R3
+Z108 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd
+Z109 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd
+l0
+L4
+VSd;lz6R1T4M6WheJHYldU1
+R6
+32
+Z110 !s108 1752449385.869000
+Z111 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd|
+Z112 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_32bit.vhd|
+R10
+R11
+!s100 =LfjeN=HOe4:_oCPld0e62
+!i10b 1
+Astructural
+R1
+R2
+R12
+l28
+L19
+Vn6Fzg28WMXc[N4AbN:FZe0
+R6
+32
+R110
+R111
+R112
+R10
+R11
+!s100 NP?lfYcZTdEd36F>KbLYN0
+!i10b 1
+Emux_8to1_8bit
+Z113 w1750622347
+R1
+R2
+R3
+Z114 8C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd
+Z115 FC:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd
+l0
+L4
+V8;ni`oVBfCed@Lb5f0PD53
+R6
+32
+Z116 !s108 1752449386.168000
+Z117 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd|
+Z118 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/mux_8to1_8bit.vhd|
+R10
+R11
+!s100 noTGcQE[=T?:j2XgIK6b_3
+!i10b 1
+Astructural
+R1
+R2
+DEx4 work 13 mux_8to1_8bit 0 22 8;ni`oVBfCed@Lb5f0PD53
+l28
+L19
+VTLSIh:k`]RdOlHD9VOKi02
+R6
+32
+R116
+R117
+R118
+R10
+R11
+!s100 PRaCLoN8fGEO9UVE:fezj0
+!i10b 1
+Epipelinedproc
+Z119 w1752450366
+R1
+R2
+R3
+Z120 8C:/Users/sahil/Documents/repos/ceg3156lab3/pipelinedproc.vhd
+Z121 FC:/Users/sahil/Documents/repos/ceg3156lab3/pipelinedproc.vhd
+l0
+L4
+VL1=m?6[@F;oT=?Ln[1c=c3
+!s100 ENd9`0NbT>JP5nCCJ8Ng_3
+R6
+32
+!i10b 1
+Z122 !s108 1752450385.766000
+Z123 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/pipelinedproc.vhd|
+Z124 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/pipelinedproc.vhd|
+R10
+R11
+Abasic
+R14
+R21
+R106
+Z125 DEx4 work 8 reg_file 0 22 fk]l2IRH:Kg6=O9leANY`0
+R40
+R73
+R42
+R80
+R87
+R13
+R54
+R1
+R2
+Z126 DEx4 work 13 pipelinedproc 0 22 L1=m?6[@F;oT=?Ln[1c=c3
+l201
+L15
+V0[_hHBlXSzJ84`^Kf>1mS2
+!s100 R>ITlcLiSd0n<2<O376jD2
+R6
+32
+!i10b 1
+R122
+R123
+R124
+R10
+R11
+Ereg_file
+Z127 w1750636487
+R1
+R2
+R3
+Z128 8C:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd
+Z129 FC:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd
+l0
+L4
+Vfk]l2IRH:Kg6=O9leANY`0
+R6
+32
+Z130 !s108 1752449386.074000
+Z131 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd|
+Z132 !s107 C:/Users/sahil/Documents/repos/ceg3156lab3/reg_file.vhd|
+R10
+R11
+!s100 knKcJL=UO7lb_WP80H_[X2
+!i10b 1
+Abasic
+R1
+R2
+R125
+l48
+L18
+VT5feFMDTG>`od]LLYzcf90
+R6
+32
+R130
+R131
+R132
+R10
+R11
+!s100 2;b3a>=6OFSP?7BjXRP<93
+!i10b 1
